@@ -1,0 +1,93 @@
+Which class is provided by spring for Database operations?
+ANS:JdbcTemplate is the class which is used in Spring.It is very efficient in the Aspect of time.
+
+- Which annotation used along with JdbcTemplate so that spring can inject JdbcTemplate.
+ANS:@Component.By using this we can inject JdbcTemplate.By creating the Object(bean) of JdbcTemplate by using @Autowired Annotation.
+
+- The JdbcTemplate is declared as bean even though the programmer has not declared this class as bean. So is it mean that JdbcTemplate is auto-configured?
+ANS:yes By adding @Autowired Annotation
+
+- Spring can Inject JdbcTemplate into our class but what annotation we have to add at our class level. What is the category of that annotaion which we used at class level to make our class as bean?
+ANS:@Component(Stereotype)//Please Explain StereoType.
+
+- What are the methods available as part of Spring JdbcTemplate class.
+ANS:update(),execute(),query()
+ 
+- Which annotation is reponsible to manage the transaction in spring.
+ANS:@Transactional
+- Which interface of spring jdbc we have to implement in our custom class so that database row can be mapped to a java object?
+ANS:RowMapper
+
+- When column name of the table and field name of the entiry class are same then which type of RowMapper we have to use?
+ANS:BeanPropertyRowMapper
+- Write the maven dependency for spring-boot-starter-jdbc.
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-jdbc</artifactId>
+</dependency> <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-jdbc</artifactId>
+</dependency> 
+
+- Write the maven dependency for spring-boot-starter-data-jpa
+ANS:<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency> 
+
+- In which file we used to add DataSource and Connection Pooling information in spring boot.
+ANS:application.properties
+- Write the mysql database configuration information.
+ANS:spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/concretepage
+spring.datasource.username=root
+spring.datasource.password= 
+
+- Write the tomcat datasource configuration.
+ANS:spring.datasource.tomcat.max-wait=20000
+spring.datasource.tomcat.max-active=50
+spring.datasource.tomcat.max-idle=20
+spring.datasource.tomcat.min-idle=15 
+
+- In which layer we used to add JdbcTemplate as Autowired.
+we can Autowire JdbcTemplate with annoted classes(StereoType)such as:@Component,@Service,@Repository,@Controller
+  Options: Service or Repository.
+  
+- Write the code for custom row mapper to select productId and productPrice for the below class .
+class Product
+{
+ int productId;
+ String productName;
+ Double productPrice;
+}
+ANS:
+public class Row implements RowMapper<Product>
+{@Override
+public Product mapRow(ResultSet rs,int num)throws SQLException
+{
+Product pr=new Product();
+pr.setProductId(rs.getInt(1));
+pr.setProductName(rs.getSting("Rice"));
+pr.setProductPrice(rs.getDouble(1900.00));
+return pr;
+}
+
+- How to use Custom RowMapper with jdbcTemplate. Write the code.
+ANS:public List<Product> getAllArticles() {
+   String sql = "SELECT articleId, title, category FROM articles";
+   RowMapper<Article> rowMapper = new ArticleRowMapper();
+   return this.jdbcTemplate.query(sql, rowMapper);
+} 
+
+- How to use BeanProperty RowMapper with jdbcTemplate. Write the code.
+public List<Product> getAllArticles() {
+   String sql = "SELECT articleId, title, category FROM articles";
+   RowMapper<Product> rowMapper = new BeanPropertyRowMapper<Product>(Article.class);
+   return this.jdbcTemplate.query(sql, rowMapper);
+} 
+- For insert,update,delete (or the operations other than select) we use "jdbcTemplate.update(sql,other parameters)" ? True or False.
+True
+- For select operations we use "jdbcTemplate.query(sql,otherparams)". True or False ?
+True
+- What is connection pooling? Read here: https://stackoverflow.com/questions/4041114/what-is-database-pooling
+Database Connection Pool makes the database open but in case of database Connection Opening it is very Expensive and Time Costing Also .To reduce the Complexity we use Connection pool. 
