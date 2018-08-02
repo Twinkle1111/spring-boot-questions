@@ -66,9 +66,9 @@ public class Row implements RowMapper<Product>
 public Product mapRow(ResultSet rs,int num)throws SQLException
 {
 Product pr=new Product();
-pr.setProductId(rs.getInt(1));
-pr.setProductName(rs.getSting("Rice"));
-pr.setProductPrice(rs.getDouble(1900.00));
+pr.setProductId(rs.getInt());
+pr.setProductName(rs.getSting("productName"));
+pr.setProductPrice(rs.getDouble(productPrice));
 return pr;
 }
 
